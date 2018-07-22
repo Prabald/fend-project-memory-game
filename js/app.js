@@ -2,13 +2,36 @@
  * Create a list that holds all of your cards
  */
 
+let cards=["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt","fa fa-cube","fa fa-anchor","fa fa-leaf","fa fa-bicycle","fa fa-diamond","fa fa-bomb","fa fa-leaf",
+"fa fa-bomb","fa fa-bolt","fa fa-bicycle","fa fa-paper-plane-o","fa fa-cube"];
+cards=shuffle(cards);
 
 /*
- * Display the cards on the page
+ * To display the cards on the page
  *   - shuffle the list of cards using the provided "shuffle" method below
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+function createDeck(){
+    let pack=document.createDocumentFragment();
+
+        for(let j=0;j<=15;j++)
+        {
+            const li=document.createElement('li');
+            
+            li.className="card";
+            const i=document.createElement('i');
+            i.className=cards[j];
+            li.appendChild(i);
+            pack.appendChild(li);
+
+        }
+    document.querySelector(".deck").appendChild(pack);
+}
+
+$("li.card").click(function(event){
+    alert("hoii");
+});
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
@@ -24,6 +47,8 @@ function shuffle(array) {
 
     return array;
 }
+
+
 
 
 /*
