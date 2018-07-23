@@ -80,14 +80,16 @@ h1 {
     background: #02ccba;
     font-size: 33px;
 }
-
+h1{
+    font-size:3em;
+}
 /*
  * Styles for the Score Panel
  */
 #wintext{
     text-align: center;
     color:white;
-    font-size: 150%;
+    font-size: 200%;
 }
 .score-panel {
     text-align: center;

@@ -4,6 +4,7 @@
 
 let cards=["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt","fa fa-cube","fa fa-anchor","fa fa-leaf","fa fa-bicycle","fa fa-diamond","fa fa-bomb","fa fa-leaf",
 "fa fa-bomb","fa fa-bolt","fa fa-bicycle","fa fa-paper-plane-o","fa fa-cube"];
+let timer;
 cards=shuffle(cards);
 let matched=0;
 let stars=3;
@@ -75,6 +76,12 @@ var isMatch=function()
     
 }
 
+//
+function startTimer(){
+    timeCount += 1;
+    $("#timer").html(timeCount);
+    timer = setTimeout(startTimer, 1000);
+}
 //To add functionality to restart button
 $(".restart").click(function(){resetGame();});
 
