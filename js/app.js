@@ -2,7 +2,7 @@
  * Create a list that holds all of your cards
  */
 
-let cards=["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt","fa fa-cube","fa fa-anchor","fa fa-leaf","fa fa-bicycle","fa fa-diamond","fa fa-bomb","fa fa-leaf",
+var cards=["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt","fa fa-cube","fa fa-anchor","fa fa-leaf","fa fa-bicycle","fa fa-diamond","fa fa-bomb","fa fa-leaf",
 "fa fa-bomb","fa fa-bolt","fa fa-bicycle","fa fa-paper-plane-o","fa fa-cube"];
 let matched=0;
 let stars=3;
@@ -11,7 +11,7 @@ let moveCount=0;
 let openCards=[];
 
 //To create deck
-   var timer = new Timer();
+   let timer = new Timer();
 
 //To create the deck and add event listeners to all the cards
 function createDeck(){
@@ -69,7 +69,7 @@ function createDeck(){
 }
 //To check whether the current card is a match or not
 
-var isMatch=function()
+let isMatch=function()
 {
     const class1 =openCards[0].children().attr("class");
     const class2=openCards[1].children().attr("class");
@@ -121,7 +121,10 @@ function resetGame(){
     updateMoveCount();
     createDeck();
     resetStars();
-    
+
+    timer.stop();
+    $('#basicUsage').html(timer.getTimeValues().toString());
+
 }
 //To update the counter
 function updateMoveCount(){
@@ -143,7 +146,7 @@ function removeStar()
     
 }
 //To close the opened card
-var closeCard =function(){                            
+let closeCard =function(){                            
     
     openCards.forEach(function(x) {
         x.toggleClass("open");
@@ -154,7 +157,7 @@ var closeCard =function(){
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
