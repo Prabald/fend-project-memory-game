@@ -84,7 +84,11 @@ h1 {
 /*
  * Styles for the Score Panel
  */
-
+#wintext{
+    text-align: center;
+    color:white;
+    font-size: 150%;
+}
 .score-panel {
     text-align: center;
     align-content: center;

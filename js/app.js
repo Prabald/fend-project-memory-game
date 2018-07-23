@@ -6,6 +6,7 @@ let cards=["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt","fa
 "fa fa-bomb","fa fa-bolt","fa fa-bicycle","fa fa-paper-plane-o","fa fa-cube"];
 cards=shuffle(cards);
 let matched=0;
+let stars=3;
 let matchCount=0;
 let moveCount=0;
 let openCards=[];
@@ -15,9 +16,11 @@ let openCards=[];
  *   - loop through each card and create its HTML
  *   - add each card's HTML to the page
  */
+//To create deck
+
 function createDeck(){
     let pack=document.createDocumentFragment();
-
+    resetStars();
         for(let j=0;j<=15;j++)
         {
             const li=document.createElement('li');
@@ -71,8 +74,11 @@ var isMatch=function()
     }
     
 }
+
 //To add functionality to restart button
 $(".restart").click(function(){resetGame();});
+
+
 //To set the cards in matched state and to check if the user has won
 function Match(){
       openCards[0].addClass("match");
@@ -83,24 +89,45 @@ function Match(){
     
     if(hasWon())
         {
-            $("#myModal").modal();
-            resetGame();
+            $(".deck").empty();
+            let content="<h1 id='wintext'>Congrats! You win by "+stars+" stars and "+moveCount+" moves";
+            content+="<br><button  onclick='resetGame()'>Restart</button>";
+            $(".deck").append(content);
+            
         }
 }
+
 //To reset the game
 function resetGame(){
     $(".deck").empty();
     openCards=[];
     matched=0;
     moveCount=0;
+    stars=3;
     updateMoveCount();
     createDeck();
+    resetStars();
     
 }
-//
+//To update the counter
 function updateMoveCount(){
     document.querySelector(".moves").innerHTML=moveCount;
+    if(moveCount===15||moveCount===20){
+        console.log("Star reduced");
+        removeStar();
+        stars--;
+    }
 }
+
+//To reduce a star
+function removeStar()
+{
+ let starList = $(".fa-star");
+    
+    $(starList[starList.length-1]).toggleClass("fa-star fa-star-o");
+    
+}
+//To close the opened card
 var closeCard =function(){
      openCards.forEach(function(x) {
         x.toggleClass("open");
@@ -130,6 +157,14 @@ function check(card)
   return !(card.hasClass("open") || card.hasClass("match"));
 };
 
+function resetStars(){
+    $(".stars").empty();
+    for (let i=0; i<3; i++){
+        $(".stars").append(`<li><i class="fa fa-star"></i></li>`);
+}
+    stars=3;
+}
+//To check whether the user has won or not 
 function hasWon(){
     if(matched===16)
         return true;
