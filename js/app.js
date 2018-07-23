@@ -4,8 +4,8 @@
 
 let cards=["fa fa-diamond","fa fa-paper-plane-o","fa fa-anchor","fa fa-bolt","fa fa-cube","fa fa-anchor","fa fa-leaf","fa fa-bicycle","fa fa-diamond","fa fa-bomb","fa fa-leaf",
 "fa fa-bomb","fa fa-bolt","fa fa-bicycle","fa fa-paper-plane-o","fa fa-cube"];
-let timer;
-cards=shuffle(cards);
+let start;
+let end
 let matched=0;
 let stars=3;
 let matchCount=0;
@@ -18,11 +18,22 @@ let openCards=[];
  *   - add each card's HTML to the page
  */
 //To create deck
+   var timer = new Timer();
+
+
+
 
 function createDeck(){
+    cards=shuffle(cards);   
+
+    timer.addEventListener('secondsUpdated', function (e) {
+    $('#basicUsage').html(timer.getTimeValues().toString());
+});
     let pack=document.createDocumentFragment();
+    
     resetStars();
-        for(let j=0;j<=15;j++)
+     
+    for(let j=0;j<=15;j++)
         {
             const li=document.createElement('li');
             
@@ -31,10 +42,13 @@ function createDeck(){
             i.className=cards[j];
             li.appendChild(i);
             li.addEventListener("click",function(){
-                
+                if(moveCount===0){
+                        timer.start();
+                    }
                 if(check($(this))){
                     
                     if(openCards.length===0){
+                        start= new Date().getTime();
                         openCards.push($(this));
                         console.log(openCards);
                     }
@@ -45,7 +59,8 @@ function createDeck(){
                                  setTimeout(Match, 400);
                             }
                         else{
-                                 setTimeout(closeCard, 700);
+                            
+                            setTimeout(closeCard, 700);
                             }
                     }
                     moveCount++;
@@ -71,18 +86,16 @@ var isMatch=function()
         return true;
     }
     else{
+        
         return false;
     }
     
 }
 
 //
-function startTimer(){
-    timeCount += 1;
-    $("#timer").html(timeCount);
-    timer = setTimeout(startTimer, 1000);
-}
+
 //To add functionality to restart button
+
 $(".restart").click(function(){resetGame();});
 
 
@@ -95,10 +108,13 @@ function Match(){
         console.log(matched);
     
     if(hasWon())
-        {
+        {   
+            timer.stop();
+            
             $(".deck").empty();
             let content="<h1 id='wintext'>Congrats! You win by "+stars+" stars and "+moveCount+" moves";
             content+="<br><button  onclick='resetGame()'>Restart</button>";
+            content +="<br>Time Taken= "+  document.getElementById("basicUsage").innerHTML;
             $(".deck").append(content);
             
         }
@@ -125,6 +141,7 @@ function updateMoveCount(){
         stars--;
     }
 }
+//To create the shaking effect
 
 //To reduce a star
 function removeStar()
@@ -135,8 +152,9 @@ function removeStar()
     
 }
 //To close the opened card
-var closeCard =function(){
-     openCards.forEach(function(x) {
+var closeCard =function(){                            
+    
+    openCards.forEach(function(x) {
         x.toggleClass("open");
         x.toggleClass("show");
     });
@@ -163,7 +181,7 @@ function check(card)
 {
   return !(card.hasClass("open") || card.hasClass("match"));
 };
-
+//To reset the stars
 function resetStars(){
     $(".stars").empty();
     for (let i=0; i<3; i++){
