@@ -12,4 +12,4 @@ This game was developed as a project for the Udacity's Front End Development Nan
 
 ## External Scripts/Libraries used
 * JQuery
-* Timer.js
+* [Timer.js](https://albert-gonzalez.github.io/easytimer.js/)
