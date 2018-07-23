@@ -103,7 +103,7 @@ function Match(){
             timer.stop();
             
             $(".deck").empty();
-            let content="<h1 id='wintext'>Congrats! You win by "+stars+" stars and "+moveCount+" moves";
+            let content="<h1 id='wintext'>Congrats! You win by<b> "+stars+" </b>stars<br> <b>"+moveCount+"</b> moves";
             content+="<br><button  onclick='resetGame()'>Restart</button>";
             content +="<br>Time Taken= "+  document.getElementById("basicUsage").innerHTML;
             $(".deck").append(content);
