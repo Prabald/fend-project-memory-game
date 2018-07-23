@@ -83,7 +83,7 @@ function Match(){
     
     if(hasWon())
         {
-            console.log("Congrats! You won.");
+            $("#myModal").modal();
             resetGame();
         }
 }
